@@ -1,0 +1,300 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>ThermCondMap: une application web pour cartographier la conductivité thermique</title>
+		<meta name="description" content="Presentation Chaire Géothermie">
+		<meta name="author" content="Lorenzo Perozzi">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/animate.min.css">
+		<link href="https://fonts.googleapis.com/css?family=Fjalla+One&amp;subset=latin-ext" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Cantarell:400,400i,700,700i" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700|Oswald:300,400,700&amp;subset=latin-ext" rel="stylesheet">
+
+		<!-- Code syntax icones-->
+		<link rel="stylesheet" href="lib/css/weather-icons.css">
+		<link rel="stylesheet" href="lib/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!-- <script type="text/javascript" async
+  		src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full">
+		</script> -->
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-state="title" data-background="">
+					 <!--************   slide title ********************* -->
+					<h1 style="position:relative;top:10px;left:0px;"><span style="font-size:125px;letter-spacing:10px;">ThermCondMap</span></br>a web-based application </br>to map the thermal</br> conductivity</h1>
+					<h4 style="position:relative;top:50px;"><span style="font-weight:700;font-size:1em">Lorenzo Perozzi<sup style='font-size:15px'>1,3</sup></span>, Jasmin Raymond<sup style='font-size:15px'>1</sup>, Erwan Gloaguen<sup style='font-size:15px'>1</sup>, Carl Bégin<sup style='font-size:15px'>2</sup></h4>
+					<!-- <h5 style="position:relative;top:20px"><a href="" class="">
+						<img width="922" height="150" src="img/logo.png" alt="logo">
+					</a>	 </h5> -->
+					<img style="position:relative;top:50px;width:620;height:157px;" src="img/logo1.png" alt="logo">
+					<aside class="notes">
+						Bonjour à tous. ThermCondMap est le resultat d'un projet réalisé dans le cadre d’une
+						subvention d'engagement partenarial pour les universités (SEP) du conseil de recherches en sciences naturelles et en génie du Canada (CRSNG)	entre l'INRS et Marmott Énergies. L'objectif du projet est de creer un outil qui permet d'aider a investiguer la conductivité thermique et quantifier son incertitude pour des porjets de géothermie residentielle.
+					</aside>
+			</section>
+
+			<section> <!-- INTRODUCTION -->
+						<section data-state="introduction">
+							<h2 style="">What are the limitations of residential geothermal projects ?</h2>
+							<aside class="notes">
+								Quelle sont les limitations des projets residentiels?
+								L’utilisation de l’énergie géothermique exige une estimation fiable du risque d'échec en ce qui
+								concerne l'exploration et le développement des réservoirs géothermiques, tant pour la
+								géothermie profonde que pour la géothermie superficielle.
+
+							</aside>
+						</section>
+
+						<section data-state="introduction">  <!-- slide -->
+								<h3 style="position:relative;">
+									<i class="wi wi-thermometer" style='font-size:120px'></i></h3>
+									<h3>uncertainty on the thermal conductivity of materials</h3></br>
+								<h3><i class="fa fa-thumbs-down" aria-hidden="true" style='font-size:120px'></i></h3>
+								<h3> wrong evaluation of the length of the heat exchangers</h3>
+
+								<aside class="notes">
+									 Le risque d’échec principal en
+									géothermie superficielle est relié à l’incertitude sur la conductivité thermique des matériaux
+									géologiques. En effet, une estimation erronée de la conductivité thermique peut entraîner une
+									mauvaise évaluation de la longueur des échangeurs de chaleur qui suffiront au besoin
+									énergétique d’un bâtiment. En effet, l’estimation de la conductivité thermique du soussol
+									a une incidence directe sur les performances du système et sur la rentabilité d’une
+									entreprise qui fournit l’énergie géothermique à ses clients.
+
+    						</aside>
+						</section>
+
+						<section data-background-iframe="http://www.marmottenergies.com/en/">
+
+							<!-- <div class="stretch">
+								<iframe data-src="http://www.marmottenergies.com/en/" height="100%" width="100%"></iframe>
+							</div> -->
+								<aside class="notes">
+									 Par exemple, Marmott Energies est une entreprise basé à Montréal qui fournit de l’énergie géothermique à l’aide
+									 d’infrastructures qu’elle installe chez ses clients.  Pour ce faire, l’entreprise conçoit, installe,
+									 exploite et entretient, à ses frais, des systèmes géothermiques résidentiels. En contrepartie,
+									 les clients de l’entreprise versent une redevance mensuelle compétitive. Pour Marmott Énergies
+									 c'est indispensable de connaître l'incertitude relié distribution spatiale de la conductivité themrique afin de évaluer les risque liée à l'installation des système géothermiques résidentiel.
+								</aside>
+						</section>
+			</section>
+
+			<section> <!-- METHODS -->
+						<section data-state="methods">
+							<h2 style="">How to estimate the length of the heat exchangers ?</h2>
+
+							<aside class="notes">
+								Comme estimer la longuer des echangeur de chaleur?
+
+							</aside>
+						</section>
+
+						<section data-background-image="img/test.png">
+							<!-- <h2 style="">How to estimate the length of the heat exchangers ?</h2> -->
+
+							<aside class="notes">
+								Lors de l’estimation de la longueur des échangeurs de chaleur, il faut tenir compte de
+								l’épaisseur et de la conductivité thermique des dépôts meubles qui reposent sur le roc afin
+								d’estimer une conductivité thermique globale. En effet, la conductivité thermique globale λ
+								(W/mK) doit être pondérée selon la formule suivante :
+							</aside>
+						</section>
+
+						<section data-background-image="img/test2.png">
+							<!-- <h2 style="">How to estimate the length of the heat exchangers ?</h2> -->
+
+							<aside class="notes">
+								ou lambda indique la conductivité thermique des depots meubles ainsi que du roc,
+
+							</aside>
+						</section>
+
+						<section data-background-image="img/test3.png">
+							<!-- <h2 style="">How to estimate the length of the heat exchangers ?</h2> -->
+
+							<aside class="notes">
+								e est l'épaisseur à la fois des depots meubles et du roc et,
+
+							</aside>
+						</section>
+
+						<section data-background-image="img/test4.png">
+							<!-- <h2 style="">How to estimate the length of the heat exchangers ?</h2> -->
+
+							<aside class="notes">
+								L est la longuers de forage. Donc, avoir une bonne connaissance des distribution de conductivité thermique, surtout dans le roc, permet d'evaluer  la longueur des échangeurs de chaleur avec plus de précision ce qui permetterait d'optimisé les couts d'installations des système géothermique.
+
+							</aside>
+						</section>
+
+
+						<section data-state="methods">  <!-- slide -->
+							<h2 style="">How to better estimate the thermal conductivity ?</h2></br>
+
+
+									<h3 class="fragment shrink" data-fragment-index="1" style="position:relative;text-align:center">
+										<i class="fa fa-arrow-right" aria-hidden="true" style='font-size:45x;vertical-align: middle;'></i>	increase the thermal response test (TRT)
+									</h3>
+
+									<h3 class="fragment grow" data-fragment-index="2" style="position:relative;text-align:center">
+										<i class="fa fa-arrow-right" aria-hidden="true" style='font-size:45px;vertical-align: middle;'></i>	geostatistical simulations
+									</h3>
+									<h3 class="fragment grow" data-fragment-index="3" style="position:relative;">
+										<i class="fa fa-arrow-right" aria-hidden="true" style='font-size:45px;vertical-align: middle;'></i>	ThermCondMap
+									</h3> </br>
+
+								<aside class="notes">
+									 Comment estimer de facon plus precise la conductivité thermique?
+									 - Augmenter la couverture spatiale en augmentant le test de reponse thermique
+									 	 Cela sera la facon la plus precise d'avoir une bonne couverture de donnée de conductivité thermique mais a des couts beacoup trops elevée
+									 - La geostatistique peut s'averer un outil très interessant, car permet de produire des 			simulations de conductivité thermique. Les simulations permettent a la fois d'estimer la conductivité thermique et d'évaluer l'incertitude
+									- ThermCondMap permet de visualiser les données necessaire a estimer la conductivité thermique globale, dans une seule application web interactive. Dans le prochaine dipaositives je montre quelle type d'information on y trouve et je vais faire une bref demonstration de l'application.
+								</aside>
+						</section>
+			</section>
+			<section>
+						<section data-state="SGS">  <!-- slide -->
+							<h2 style="color:#fff">How ThermCondMap works ?</h2></br>
+
+								<aside class="notes">
+
+								</aside>
+						</section>
+
+						<section data-background-iframe="https://marmott.carto.com/viz/6164e022-bc9c-11e6-b2b7-0e3ff518bd15/embed_map">  <!-- slide -->
+								<aside class="notes">
+									 Dans ThermCondMap on trouve plusieurs type d'information de nature géologique:
+
+									 - l'epaisseur des dépòt meubles,
+									 - la geologie de surface ou elle est disponible
+									 - la géologie du roc
+									 Jusqu'ici rien de nouveau, on peut retrouver les même information dans le SIGEOM par exemple.
+								</aside>
+						</section>
+
+						<!-- <section data-background-iframe="https://marmott.carto.com/viz/b872eb5a-bcf3-11e6-b7c2-0e3ff518bd15/embed_map">
+
+								<aside class="notes">
+									 ThermCondMap est une application web qui permet de regrouper les information necessaires a estimer la conductivité thermique globale d'un site potentiel pour installer un système géothermique.
+								</aside>
+						</section> -->
+
+						<section  data-transition='fade' data-background-transition="fade-in slide-out" data-background-image="img/SGS1.png">
+							<h2 style="color:white;position:relative;bottom:300px">Geostatistical simulations</h2><!-- slide -->
+								<aside class="notes">
+
+									 En plus des ces informations de base, on y a ajouté les resultats des simulation géostatistiques de conductivité thermique.
+									 Pour effectuer les simulation on s'est basé  sur l'information disponible comme par exemples le donnée de conductivité thermique recueilli pendant le TRT....
+								</aside>
+						</section>
+
+						<section  data-transition='fade' data-background-transition="fade-in slide-out" data-background-transition-speed="fast" data-background-image="img/SGS2.png">
+							<h2 style="color:white;position:relative;bottom:300px">Geostatistical simulations</h2><!-- slide -->
+								<aside class="notes">
+									 ainsi que mesures effectué sur des affleurements...
+								</aside>
+						</section>
+
+						<section   data-transition='fade' data-background-transition="fade-in slide-out" data-background-image="img/SGS3.png">
+							<h2 style="color:white;position:relative;bottom:300px">Geostatistical simulations</h2> <!-- slide -->
+								<aside class="notes">
+									 pour augmenter la couverture spatiale des données de conductivité thermqiue on a aussi ajouté des données synthetiques obtenu a partir des distribution de conductivité thermique connu pour chaque unit. geologique.
+								</aside>
+						</section>
+
+						<section  data-transition='fade' data-background-transition="fade-in" data-background-image="img/SGS4.png">  <h2 style="color:white;position:relative;bottom:300px">Geostatistical simulations</h2><!-- slide -->
+								<aside class="notes">
+									 A partir de ces données on peut simuler l'ensembler de la carte. Pour ce projet on a opté par des SGS dont fonctionnement et brievment expliqueé par ces diapos.
+									 En voulant simuler un pixel, admetton X15, on calcul une distribution de krigeage avec les donnée disponible de laquelle on tire une valeur de facon aletoire que on aassigne  au pixel.
+								</aside>
+						</section>
+
+						<section  data-transition='fade' data-background-transition="fade-in" data-background-image="img/SGS5.png">  <h2 style="color:white;position:relative;bottom:300px">Geostatistical simulations</h2><!-- slide -->
+								<aside class="notes">
+									On passe au pixel suivant, on calcul une nouvel distribution de krigeage en englobant le pixel que on vient de simuler, on tire une valeur au hasard que on associ au pixel X16.
+								</aside>
+						</section>
+
+						<section  data-transition='fade' data-background-transition="fade-in" data-background-image="img/SGS6.png">
+							<h2 style="color:white;position:relative;bottom:300px">Geostatistical simulations</h2> <!-- slide -->
+								<aside class="notes">
+									Aisi de suite jusqu'au on simule chaque pixel de le grille.
+								 En changeant de facon aleatoire le chemin que on uitlise pour simuler chaque pixel, on peut generer plusieurs realisation stochastique equiprobables. Ceci permet de quantifier l'incertitude sur les valeur de conductivité thermqiue simulée
+								</aside>
+						</section>
+
+			</section>
+
+				<section data-state="demo"><h2><a href="http://lperozzi.github.io/ThermCondMap">ThermCondMap demo</a></h2>
+					<aside class="notes">
+						Je vais maintenant vous montrer comment l'application fonctionne.
+					</aside>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				// The "normal" size of the presentation, aspect ratio will be preserved
+    		// when the presentation is scaled to fit different resolutions. Can be
+    		// specified using percentage units.
+    		width: 960,
+    		height: 700,
+
+    		// Factor of the display size that should remain empty around the content
+    		margin: 0.1,
+
+    		// Bounds for smallest/largest possible scale to apply to content
+    		minScale: 1,
+    		maxScale: 1,
+				history: true,
+				math: {
+        		mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+        		config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+    		},
+
+				transition: 'linear',
+				transitionSpeed: 'slow',
+				backgroundTransition: 'Fade',
+				backgroundtransitionSpeed: 'slow',
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/math/math.js', async: true }
+					]
+			});
+		</script>
+	</body>
+</html>
